@@ -124,3 +124,63 @@ img{
     text-align:center;
     box-shadow: 2px 2px 3px #999;  
 }
+.header-image {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    text-align: center;
+  }
+  
+  .header-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+.contact-page {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.contact-info-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 90%;
+    max-width: 1000px;
+}
+
+.contact-image img {
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.contact-details {
+    padding-left: 20px;
+    border-left: 2px solid #ccc;
+}
+
+.contact-details h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: #0066cc;
+}
+
+.contact-details p {
+    margin: 10px 0;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+.contact-details a {
+    color: #00BFFF;
+    text-decoration: none;
+  }
+.contact-details a:hover {
+    text-decoration: underline;
+  }
