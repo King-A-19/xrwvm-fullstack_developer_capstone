@@ -90,20 +90,12 @@ def get_dealerships(request, state="All"):
     return JsonResponse({"status":200,"dealers":dealerships})
 
 def get_dealer_details(request, dealer_id):
-    if dealer_id:
-        # Construct the endpoint with the dealer_id
+    if(dealer_id):
         endpoint = "/fetchDealer/"+str(dealer_id)
-        
-        # Call the get_request method to fetch dealer details
         dealership = get_request(endpoint)
-        
-        # Check if the dealership data was returned successfully
-        if dealership:
-            return JsonResponse({"status": 200, "dealer": dealership})
-        else:
-            return JsonResponse({"status": 404, "message": "Dealer not found"})
+        return JsonResponse({"status":200,"dealer":dealership})
     else:
-        return JsonResponse({"status": 400, "message": "Bad Request"})
+        return JsonResponse({"status":400,"message":"Bad Request"})
 
 # Create a `get_dealer_details` view to render the dealer details
 # def get_dealer_details(request, dealer_id):
