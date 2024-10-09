@@ -86,3 +86,4 @@ def initiate():
             name=data['name'], car_make=data['car_make'],
             type=data['type'], year=data['year']
         )
+
