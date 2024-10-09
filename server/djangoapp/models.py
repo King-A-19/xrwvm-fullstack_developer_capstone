@@ -1,7 +1,6 @@
 # Uncomment the following imports before adding the Model code
 
 from django.db import models
-#from django.utils.timezone import now
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
@@ -29,13 +28,14 @@ class CarModel(models.Model):
         ('HATCHBACK', 'Hatchback'),
     ]
     type = models.CharField(max_length=10, choices=CAR_TYPES, default='SUV')
-    year = models.IntegerField(default= 2023,
+    year = models.IntegerField(
+        default=2023,
         validators=[
             MaxValueValidator(2023),
-            MinValueValidator(2015)  
+            MinValueValidator(2015)
         ]
     )
-    color = models.CharField(max_length=50) 
+    color = models.CharField(max_length=50)
 
     def __str__(self):
         return f"{self.car_make.name} {self.name}"  # Print car make and model
