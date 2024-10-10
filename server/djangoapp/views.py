@@ -74,7 +74,7 @@ def registration(request):
         return JsonResponse(data)
 
 
-# Update the `get_dealerships` view to render a list of dealerships (all by default, particular state if passed)
+# Update the `get_dealerships` view to render a list of dealerships
 def get_dealerships(request, state="All"):
     endpoint = f"/fetchDealers/{state}" if state != "All" else "/fetchDealers"
     dealerships = get_request(endpoint)
