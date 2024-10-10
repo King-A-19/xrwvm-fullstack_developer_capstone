@@ -1,6 +1,3 @@
-# Uncomment the required imports before adding the code
-
-from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.contrib.auth import login, authenticate
@@ -43,8 +40,6 @@ def logout_request(request):
 # Create a `registration` view to handle sign-up request
 @csrf_exempt
 def registration(request):
-    context = {}
-
     data = json.loads(request.body)
     username = data['userName']
     password = data['password']
@@ -52,7 +47,6 @@ def registration(request):
     last_name = data['lastName']
     email = data['email']
     username_exist = False
-    email_exist = False
     try:
         # Check if user already exists
         User.objects.get(username=username)
@@ -78,10 +72,7 @@ def registration(request):
 
 # Update the `get_dealerships` view to render a list of dealerships (all by default, particular state if passed)
 def get_dealerships(request, state="All"):
-    if state == "All":
-        endpoint = "/fetchDealers"
-    else:
-        endpoint = f"/fetchDealers/{state}"
+    endpoint = f"/fetchDealers/{state}" if state != "All" else "/fetchDealers"
     dealerships = get_request(endpoint)
     return JsonResponse({"status": 200, "dealers": dealerships})
 
@@ -97,7 +88,6 @@ def get_dealer_details(request, dealer_id):
 
 # Create a `get_dealer_reviews` view to render the dealer reviews
 def get_dealer_reviews(request, dealer_id):
-    # if dealer id has been provided
     if dealer_id:
         endpoint = f"/fetchReviews/dealer/{dealer_id}"
         reviews = get_request(endpoint)
@@ -113,7 +103,7 @@ def add_review(request):
     if not request.user.is_anonymous:
         data = json.loads(request.body)
         try:
-            response = post_review(data)
+            post_review(data)
             return JsonResponse({"status": 200})
         except Exception:
             return JsonResponse({"status": 401, "message": "Error in posting review"})
