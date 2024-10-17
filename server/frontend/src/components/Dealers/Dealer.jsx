@@ -24,14 +24,24 @@ const Dealer = () => {
   const reviews_url = `${root_url}djangoapp/reviews/dealer/${id}`;
   const post_review_url = `${root_url}postreview/${id}`;
 
+  // Updated get_dealer function
   const get_dealer = async () => {
     try {
       const res = await fetch(dealer_url, { method: "GET" });
       const retobj = await res.json();
+      
+      console.log("Dealer response:", retobj); // Log the response for debugging
 
       if (retobj.status === 200) {
-        let dealerobjs = Array.from(retobj.dealer);
-        setDealer(dealerobjs[0] || {}); // Ensure fallback if empty
+        let dealerobjs = Array.isArray(retobj.dealer) ? retobj.dealer : [retobj.dealer];
+        const dealerData = dealerobjs[0] || {};
+        setDealer({
+          full_name: dealerData.full_name || "Unknown Dealer",
+          city: dealerData.city || "Unknown City",
+          address: dealerData.address || "Unknown Address",
+          zip: dealerData.zip || "Unknown Zip",
+          state: dealerData.state || "Unknown State"
+        });
       } else {
         setError("Failed to load dealer details.");
       }
@@ -85,7 +95,7 @@ const Dealer = () => {
         </a>
       );
     }
-  }, []);
+  }, []); // Make sure this empty dependency array stays here
 
   // Render error message if any
   if (error) {
